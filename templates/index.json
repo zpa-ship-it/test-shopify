@@ -1,8 +1,18 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "ios-hero",
       "settings": {
+        "image": "shopify://shop_images/91e4c3a8b3cbf603a3d52fb4d81a8904.png",
         "eyebrow": "LUMA OS",
         "heading": "Fluid luxury, engineered for now.",
         "text": "A cinematic Shopify storefront with liquid glass, slow motion depth, and a premium mobile-first shopping flow.",
@@ -20,13 +30,14 @@
         "eyebrow": "The edit",
         "heading": "Objects with atmosphere.",
         "collection": "all",
-        "limit": 4,
+        "limit": 8,
         "link_label": "View all"
       }
     },
     "feature": {
       "type": "liquid-feature",
       "settings": {
+        "image": "shopify://shop_images/8c9b10036d6c96315b5843db891eb502.png",
         "badge": "Liquid glass",
         "eyebrow": "System feel",
         "heading": "Soft reflections. Sharp commerce.",
@@ -34,5 +45,9 @@
       }
     }
   },
-  "order": ["hero", "featured", "feature"]
+  "order": [
+    "hero",
+    "featured",
+    "feature"
+  ]
 }
