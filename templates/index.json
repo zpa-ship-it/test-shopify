@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "hero": {
+      "type": "ios-hero",
+      "settings": {
+        "eyebrow": "LUMA OS",
+        "heading": "Fluid luxury, engineered for now.",
+        "text": "A cinematic Shopify storefront with liquid glass, slow motion depth, and a premium mobile-first shopping flow.",
+        "primary_label": "Shop the drop",
+        "primary_link": "shopify://collections/all",
+        "secondary_label": "Explore",
+        "secondary_link": "shopify://collections/all",
+        "card_label": "New collection",
+        "card_value": "AURA 01"
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "The edit",
+        "heading": "Objects with atmosphere.",
+        "collection": "all",
+        "limit": 4,
+        "link_label": "View all"
+      }
+    },
+    "feature": {
+      "type": "liquid-feature",
+      "settings": {
+        "badge": "Liquid glass",
+        "eyebrow": "System feel",
+        "heading": "Soft reflections. Sharp commerce.",
+        "text": "A dark, polished interface that feels closer to a product launch than a default Shopify theme."
+      }
+    }
+  },
+  "order": ["hero", "featured", "feature"]
+}
