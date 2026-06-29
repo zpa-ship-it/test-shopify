@@ -12,7 +12,7 @@
     "hero": {
       "type": "ios-hero",
       "settings": {
-        "image": "shopify://shop_images/91e4c3a8b3cbf603a3d52fb4d81a8904.png",
+        "video": "shopify://files/videos/Create_a_cinematic_10_12_second_ultra_high-end_product_intro_video_for_a_premium_hygiene_brand.____T_seed3592258393.mp4",
         "eyebrow": "LUMA OS",
         "heading": "Fluid luxury, engineered for now.",
         "text": "A cinematic Shopify storefront with liquid glass, slow motion depth, and a premium mobile-first shopping flow.",
@@ -30,7 +30,7 @@
         "eyebrow": "The edit",
         "heading": "Objects with atmosphere.",
         "collection": "all",
-        "limit": 8,
+        "limit": 4,
         "link_label": "View all"
       }
     },
