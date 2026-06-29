@@ -1,6 +1,375 @@
+{% doc %}
+  @prompt
+    i want to be able to add a full screen intro for the web site (you know when you enter a game and there is an intro and a button pay then you click and everything apears) i want the same
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-intro-screen-{{ ai_gen_id }} {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    background-color: {{ block.settings.background_color }};
+    transition: opacity {{ block.settings.fade_duration }}s ease, visibility {{ block.settings.fade_duration }}s ease;
+  }
+
+  .ai-intro-screen-{{ ai_gen_id }}.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .ai-intro-screen-content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .ai-intro-screen-logo-{{ ai_gen_id }} {
+    max-width: {{ block.settings.logo_max_width }}px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 40px;
+    animation: ai-intro-fade-in-{{ ai_gen_id }} {{ block.settings.logo_animation_duration }}s ease-out;
+  }
+
+  .ai-intro-screen-logo-placeholder-{{ ai_gen_id }} {
+    max-width: {{ block.settings.logo_max_width }}px;
+    width: 100%;
+    margin-bottom: 40px;
+    animation: ai-intro-fade-in-{{ ai_gen_id }} {{ block.settings.logo_animation_duration }}s ease-out;
+  }
+
+  .ai-intro-screen-logo-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .ai-intro-screen-title-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.title_size }}px;
+    margin: 0 0 20px;
+    animation: ai-intro-fade-in-{{ ai_gen_id }} {{ block.settings.logo_animation_duration }}s ease-out 0.3s backwards;
+  }
+
+  .ai-intro-screen-subtitle-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.subtitle_size }}px;
+    margin: 0 0 40px;
+    opacity: 0.9;
+    animation: ai-intro-fade-in-{{ ai_gen_id }} {{ block.settings.logo_animation_duration }}s ease-out 0.5s backwards;
+  }
+
+  .ai-intro-screen-button-{{ ai_gen_id }} {
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: ai-intro-fade-in-{{ ai_gen_id }} {{ block.settings.logo_animation_duration }}s ease-out 0.7s backwards;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .ai-intro-screen-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+    transform: scale(1.05);
+  }
+
+  @keyframes ai-intro-fade-in-{{ ai_gen_id }} {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-intro-screen-logo-{{ ai_gen_id }},
+    .ai-intro-screen-logo-placeholder-{{ ai_gen_id }} {
+      max-width: {{ block.settings.logo_max_width | times: 0.7 }}px;
+    }
+
+    .ai-intro-screen-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.7 }}px;
+    }
+
+    .ai-intro-screen-subtitle-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subtitle_size | times: 0.8 }}px;
+    }
+
+    .ai-intro-screen-button-{{ ai_gen_id }} {
+      font-size: {{ block.settings.button_font_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<intro-screen-{{ ai_gen_id }}
+  class="ai-intro-screen-{{ ai_gen_id }}"
+  data-session-key="intro-shown-{{ ai_gen_id }}"
+  data-show-once="{{ block.settings.show_once }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-intro-screen-content-{{ ai_gen_id }}">
+    {% if block.settings.logo %}
+      <img
+        src="{{ block.settings.logo | image_url: width: 1000 }}"
+        alt="{{ block.settings.logo.alt | default: 'Logo' | escape }}"
+        class="ai-intro-screen-logo-{{ ai_gen_id }}"
+        width="{{ block.settings.logo.width }}"
+        height="{{ block.settings.logo.height }}"
+      >
+    {% else %}
+      <div class="ai-intro-screen-logo-placeholder-{{ ai_gen_id }}">
+        {{ 'image' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.title != blank %}
+      <h1 class="ai-intro-screen-title-{{ ai_gen_id }}">{{ block.settings.title }}</h1>
+    {% endif %}
+
+    {% if block.settings.subtitle != blank %}
+      <p class="ai-intro-screen-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+    {% endif %}
+
+    <button
+      class="ai-intro-screen-button-{{ ai_gen_id }}"
+      aria-label="{{ block.settings.button_text }}"
+    >
+      {{ block.settings.button_text }}
+    </button>
+  </div>
+</intro-screen-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class IntroScreen{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.sessionKey = this.dataset.sessionKey;
+        this.showOnce = this.dataset.showOnce === 'true';
+      }
+
+      connectedCallback() {
+        if (this.showOnce && sessionStorage.getItem(this.sessionKey)) {
+          this.classList.add('hidden');
+          return;
+        }
+
+        this.button = this.querySelector('.ai-intro-screen-button-{{ ai_gen_id }}');
+        this.button.addEventListener('click', () => this.hideIntro());
+
+        document.body.style.overflow = 'hidden';
+      }
+
+      hideIntro() {
+        this.classList.add('hidden');
+        document.body.style.overflow = '';
+
+        if (this.showOnce) {
+          sessionStorage.setItem(this.sessionKey, 'true');
+        }
+      }
+    }
+
+    customElements.define('intro-screen-{{ ai_gen_id }}', IntroScreen{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Fullscreen intro",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "label": "Logo max width",
+      "min": 100,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Bienvenue"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Préparez-vous pour une expérience unique"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Entrer"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "label": "Vertical padding",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Hover background color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "logo_animation_duration",
+      "label": "Entrance animation duration",
+      "min": 0.5,
+      "max": 2,
+      "step": 0.5,
+      "unit": "s",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "fade_duration",
+      "label": "Exit fade duration",
+      "min": 0.5,
+      "max": 2,
+      "step": 0.5,
+      "unit": "s",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Behavior"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_once",
+      "label": "Show only once per session",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fullscreen intro"
+    }
+  ]
+}
 {% endschema %}
