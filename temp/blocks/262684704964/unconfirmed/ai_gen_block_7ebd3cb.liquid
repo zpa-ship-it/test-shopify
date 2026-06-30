@@ -1,6 +1,742 @@
+{% doc %}
+  @prompt
+    pourquoi acheter maintenant
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-buy-now-{{ ai_gen_id }} {
+    display: block;
+    padding: 40px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+  }
+
+  .ai-buy-now-container-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .ai-buy-now-header-{{ ai_gen_id }} {
+    text-align: {{ block.settings.text_alignment }};
+  }
+
+  .ai-buy-now-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 12px 0;
+    font-weight: 700;
+  }
+
+  .ai-buy-now-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+  }
+
+  .ai-buy-now-reasons-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: 20px;
+  }
+
+  .ai-buy-now-reason-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+    background-color: {{ block.settings.card_background_color }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    border: 1px solid {{ block.settings.card_border_color }};
+  }
+
+  .ai-buy-now-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ block.settings.icon_background_color }};
+    border-radius: 50%;
+    color: {{ block.settings.icon_color }};
+    flex-shrink: 0;
+  }
+
+  .ai-buy-now-icon-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.icon_size }}px * 0.5);
+    height: calc({{ block.settings.icon_size }}px * 0.5);
+  }
+
+  .ai-buy-now-reason-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.reason_title_size }}px;
+    color: {{ block.settings.reason_title_color }};
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .ai-buy-now-reason-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.reason_text_size }}px;
+    color: {{ block.settings.reason_text_color }};
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-buy-now-reasons-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    }
+
+    .ai-buy-now-{{ ai_gen_id }} {
+      padding: 24px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-buy-now-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-buy-now-container-{{ ai_gen_id }}">
+    {% if block.settings.title != blank or block.settings.subtitle != blank %}
+      <div class="ai-buy-now-header-{{ ai_gen_id }}">
+        {% if block.settings.title != blank %}
+          <h2 class="ai-buy-now-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+        {% endif %}
+        {% if block.settings.subtitle != blank %}
+          <div class="ai-buy-now-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-buy-now-reasons-{{ ai_gen_id }}">
+      {% if block.settings.reason_1_enabled %}
+        <div class="ai-buy-now-reason-{{ ai_gen_id }}">
+          <div class="ai-buy-now-icon-{{ ai_gen_id }}">
+            {% case block.settings.reason_1_icon %}
+              {% when 'clock' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              {% when 'tag' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                  <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                </svg>
+              {% when 'truck' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="3" width="15" height="13"></rect>
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+              {% when 'shield' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              {% when 'star' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              {% when 'gift' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                  <rect x="2" y="7" width="20" height="5"></rect>
+                  <line x1="12" y1="22" x2="12" y2="7"></line>
+                  <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                  <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                </svg>
+            {% endcase %}
+          </div>
+          {% if block.settings.reason_1_title != blank %}
+            <h3 class="ai-buy-now-reason-title-{{ ai_gen_id }}">{{ block.settings.reason_1_title }}</h3>
+          {% endif %}
+          {% if block.settings.reason_1_text != blank %}
+            <div class="ai-buy-now-reason-text-{{ ai_gen_id }}">{{ block.settings.reason_1_text }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.reason_2_enabled %}
+        <div class="ai-buy-now-reason-{{ ai_gen_id }}">
+          <div class="ai-buy-now-icon-{{ ai_gen_id }}">
+            {% case block.settings.reason_2_icon %}
+              {% when 'clock' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              {% when 'tag' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                  <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                </svg>
+              {% when 'truck' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="3" width="15" height="13"></rect>
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+              {% when 'shield' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              {% when 'star' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              {% when 'gift' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                  <rect x="2" y="7" width="20" height="5"></rect>
+                  <line x1="12" y1="22" x2="12" y2="7"></line>
+                  <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                  <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                </svg>
+            {% endcase %}
+          </div>
+          {% if block.settings.reason_2_title != blank %}
+            <h3 class="ai-buy-now-reason-title-{{ ai_gen_id }}">{{ block.settings.reason_2_title }}</h3>
+          {% endif %}
+          {% if block.settings.reason_2_text != blank %}
+            <div class="ai-buy-now-reason-text-{{ ai_gen_id }}">{{ block.settings.reason_2_text }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.reason_3_enabled %}
+        <div class="ai-buy-now-reason-{{ ai_gen_id }}">
+          <div class="ai-buy-now-icon-{{ ai_gen_id }}">
+            {% case block.settings.reason_3_icon %}
+              {% when 'clock' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              {% when 'tag' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                  <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                </svg>
+              {% when 'truck' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="3" width="15" height="13"></rect>
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+              {% when 'shield' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              {% when 'star' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              {% when 'gift' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                  <rect x="2" y="7" width="20" height="5"></rect>
+                  <line x1="12" y1="22" x2="12" y2="7"></line>
+                  <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                  <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                </svg>
+            {% endcase %}
+          </div>
+          {% if block.settings.reason_3_title != blank %}
+            <h3 class="ai-buy-now-reason-title-{{ ai_gen_id }}">{{ block.settings.reason_3_title }}</h3>
+          {% endif %}
+          {% if block.settings.reason_3_text != blank %}
+            <div class="ai-buy-now-reason-text-{{ ai_gen_id }}">{{ block.settings.reason_3_text }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.reason_4_enabled %}
+        <div class="ai-buy-now-reason-{{ ai_gen_id }}">
+          <div class="ai-buy-now-icon-{{ ai_gen_id }}">
+            {% case block.settings.reason_4_icon %}
+              {% when 'clock' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              {% when 'tag' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                  <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                </svg>
+              {% when 'truck' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="3" width="15" height="13"></rect>
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+              {% when 'shield' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              {% when 'star' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              {% when 'gift' %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                  <rect x="2" y="7" width="20" height="5"></rect>
+                  <line x1="12" y1="22" x2="12" y2="7"></line>
+                  <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                  <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                </svg>
+            {% endcase %}
+          </div>
+          {% if block.settings.reason_4_title != blank %}
+            <h3 class="ai-buy-now-reason-title-{{ ai_gen_id }}">{{ block.settings.reason_4_title }}</h3>
+          {% endif %}
+          {% if block.settings.reason_4_text != blank %}
+            <div class="ai-buy-now-reason-text-{{ ai_gen_id }}">{{ block.settings.reason_4_text }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Acheter maintenant",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "En-tête"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Titre",
+      "default": "Pourquoi acheter maintenant"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtitle",
+      "label": "Sous-titre",
+      "default": "Profitez de ces avantages exclusifs"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Taille du titre",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Taille du sous-titre",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alignement du texte",
+      "options": [
+        {
+          "value": "left",
+          "label": "Gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "right",
+          "label": "Droite"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Disposition"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Colonnes sur ordinateur",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Colonnes sur mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Largeur sur ordinateur",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Raison 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "reason_1_enabled",
+      "label": "Activer la raison 1",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "reason_1_icon",
+      "label": "Icône",
+      "options": [
+        {
+          "value": "clock",
+          "label": "Horloge"
+        },
+        {
+          "value": "tag",
+          "label": "Étiquette"
+        },
+        {
+          "value": "truck",
+          "label": "Camion"
+        },
+        {
+          "value": "shield",
+          "label": "Bouclier"
+        },
+        {
+          "value": "star",
+          "label": "Étoile"
+        },
+        {
+          "value": "gift",
+          "label": "Cadeau"
+        }
+      ],
+      "default": "tag"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "reason_1_title",
+      "label": "Titre",
+      "default": "Offre limitée"
+    },
+    {
+      "type": "richtext",
+      "id": "reason_1_text",
+      "label": "Texte",
+      "default": "<p>Profitez de prix réduits disponibles pour une durée limitée</p>"
+    },
+    {
+      "type": "header",
+      "content": "Raison 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "reason_2_enabled",
+      "label": "Activer la raison 2",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "reason_2_icon",
+      "label": "Icône",
+      "options": [
+        {
+          "value": "clock",
+          "label": "Horloge"
+        },
+        {
+          "value": "tag",
+          "label": "Étiquette"
+        },
+        {
+          "value": "truck",
+          "label": "Camion"
+        },
+        {
+          "value": "shield",
+          "label": "Bouclier"
+        },
+        {
+          "value": "star",
+          "label": "Étoile"
+        },
+        {
+          "value": "gift",
+          "label": "Cadeau"
+        }
+      ],
+      "default": "truck"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "reason_2_title",
+      "label": "Titre",
+      "default": "Livraison gratuite"
+    },
+    {
+      "type": "richtext",
+      "id": "reason_2_text",
+      "label": "Texte",
+      "default": "<p>Recevez votre commande sans frais de livraison</p>"
+    },
+    {
+      "type": "header",
+      "content": "Raison 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "reason_3_enabled",
+      "label": "Activer la raison 3",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "reason_3_icon",
+      "label": "Icône",
+      "options": [
+        {
+          "value": "clock",
+          "label": "Horloge"
+        },
+        {
+          "value": "tag",
+          "label": "Étiquette"
+        },
+        {
+          "value": "truck",
+          "label": "Camion"
+        },
+        {
+          "value": "shield",
+          "label": "Bouclier"
+        },
+        {
+          "value": "star",
+          "label": "Étoile"
+        },
+        {
+          "value": "gift",
+          "label": "Cadeau"
+        }
+      ],
+      "default": "shield"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "reason_3_title",
+      "label": "Titre",
+      "default": "Garantie satisfait"
+    },
+    {
+      "type": "richtext",
+      "id": "reason_3_text",
+      "label": "Texte",
+      "default": "<p>Retournez votre produit dans les 30 jours pour un remboursement complet</p>"
+    },
+    {
+      "type": "header",
+      "content": "Raison 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "reason_4_enabled",
+      "label": "Activer la raison 4",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "reason_4_icon",
+      "label": "Icône",
+      "options": [
+        {
+          "value": "clock",
+          "label": "Horloge"
+        },
+        {
+          "value": "tag",
+          "label": "Étiquette"
+        },
+        {
+          "value": "truck",
+          "label": "Camion"
+        },
+        {
+          "value": "shield",
+          "label": "Bouclier"
+        },
+        {
+          "value": "star",
+          "label": "Étoile"
+        },
+        {
+          "value": "gift",
+          "label": "Cadeau"
+        }
+      ],
+      "default": "gift"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "reason_4_title",
+      "label": "Titre",
+      "default": "Cadeau gratuit"
+    },
+    {
+      "type": "richtext",
+      "id": "reason_4_text",
+      "label": "Texte",
+      "default": "<p>Recevez un cadeau surprise avec votre commande</p>"
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Arrière-plan",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Titre",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Sous-titre",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Arrière-plan de carte",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Bordure de carte",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "icon_background_color",
+      "label": "Arrière-plan d'icône",
+      "default": "#000f9f"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icône",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "reason_title_color",
+      "label": "Titre de raison",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "reason_text_color",
+      "label": "Texte de raison",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Rayon de bordure",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Rayon de bordure de carte",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Taille d'icône",
+      "min": 32,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "reason_title_size",
+      "label": "Taille du titre de raison",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "reason_text_size",
+      "label": "Taille du texte de raison",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    }
+  ],
+  "presets": [
+    {
+      "name": "Acheter maintenant"
+    }
+  ]
+}
 {% endschema %}
