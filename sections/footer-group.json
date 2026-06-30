@@ -11,6 +11,59 @@
   "type": "footer",
   "name": "Footer group",
   "sections": {
+    "17828373380c4871b4": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_7ebd3cb_3RCBPF": {
+          "type": "ai_gen_block_7ebd3cb",
+          "settings": {
+            "title": "Pourquoi acheter maintenant",
+            "subtitle": "Profitez de ces avantages exclusifs",
+            "title_size": 32,
+            "subtitle_size": 16,
+            "text_alignment": "center",
+            "columns_desktop": 2,
+            "columns_mobile": "1",
+            "desktop_width_percent": 100,
+            "reason_1_enabled": true,
+            "reason_1_icon": "tag",
+            "reason_1_title": "Offre limitée",
+            "reason_1_text": "<p>Profitez de prix réduits disponibles pour une durée limitée</p>",
+            "reason_2_enabled": true,
+            "reason_2_icon": "truck",
+            "reason_2_title": "Livraison gratuite",
+            "reason_2_text": "<p>Recevez votre commande sans frais de livraison</p>",
+            "reason_3_enabled": true,
+            "reason_3_icon": "shield",
+            "reason_3_title": "Garantie satisfait",
+            "reason_3_text": "<p>Retournez votre produit dans les 30 jours pour un remboursement complet</p>",
+            "reason_4_enabled": true,
+            "reason_4_icon": "gift",
+            "reason_4_title": "Cadeau gratuit",
+            "reason_4_text": "<p>Recevez un cadeau surprise avec votre commande</p>",
+            "background_color": "#0C0B0B",
+            "title_color": "#000000",
+            "subtitle_color": "#FFFFFF",
+            "card_background_color": "#000000",
+            "card_border_color": "#FFFFFF",
+            "icon_background_color": "#000f9f",
+            "icon_color": "#ffffff",
+            "reason_title_color": "#000000",
+            "reason_text_color": "#FFFFFF",
+            "border_radius": 12,
+            "card_border_radius": 8,
+            "icon_size": 48,
+            "reason_title_size": 18,
+            "reason_text_size": 14
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_7ebd3cb_3RCBPF"
+      ],
+      "settings": {}
+    },
     "featured_collection_bHgtmF": {
       "type": "featured-collection",
       "disabled": true,
@@ -22,6 +75,59 @@
         "limit": 4,
         "link_label": "View all"
       }
+    },
+    "1782836800ddf1139d": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_2828f19_fK98gn": {
+          "type": "ai_gen_block_2828f19",
+          "settings": {
+            "title": "Pourquoi nous choisir ?",
+            "subtitle": "<p>Découvrez ce qui nous rend uniques et pourquoi nos clients nous font confiance</p>",
+            "title_size": 36,
+            "subtitle_size": 16,
+            "text_alignment": "center",
+            "show_reason_1": true,
+            "reason_1_title": "Qualité supérieure",
+            "reason_1_text": "<p>Nos produits sont fabriqués avec les meilleurs matériaux pour garantir durabilité et excellence</p>",
+            "show_reason_2": true,
+            "reason_2_title": "Service client exceptionnel",
+            "reason_2_text": "<p>Notre équipe est disponible 7j/7 pour répondre à toutes vos questions et vous accompagner</p>",
+            "show_reason_3": true,
+            "reason_3_title": "Satisfaction garantie",
+            "reason_3_text": "<p>Retours gratuits sous 30 jours si vous n'êtes pas entièrement satisfait de votre achat</p>",
+            "show_reason_4": true,
+            "reason_4_title": "Livraison rapide",
+            "reason_4_text": "<p>Expédition sous 24h et livraison rapide partout au Canada</p>",
+            "columns_desktop": 4,
+            "columns_mobile": "1",
+            "spacing_between_items": 30,
+            "section_padding": 60,
+            "desktop_width_percent": 100,
+            "card_padding": 30,
+            "card_border_radius": 12,
+            "card_border_width": 1,
+            "icon_size": 60,
+            "icon_spacing": 20,
+            "item_title_size": 20,
+            "item_text_size": 14,
+            "background_color": "#010101",
+            "title_color": "#000000",
+            "subtitle_color": "#EDECEC",
+            "card_background_color": "#0B0B0B",
+            "card_border_color": "#e5e5e5",
+            "icon_background_color": "#AFB4DF",
+            "icon_color": "#ffffff",
+            "item_title_color": "#EDECEC",
+            "item_text_color": "#666666"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_2828f19_fK98gn"
+      ],
+      "settings": {}
     },
     "featured_collection_B8QRaq": {
       "type": "featured-collection",
@@ -66,7 +172,9 @@
     }
   },
   "order": [
+    "17828373380c4871b4",
     "featured_collection_bHgtmF",
+    "1782836800ddf1139d",
     "featured_collection_B8QRaq",
     "footer",
     "featured_collection_Vax7Nm",
