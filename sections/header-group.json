@@ -24,6 +24,7 @@
         "ai_gen_block_7834006_xhEQna": {
           "type": "ai_gen_block_7834006",
           "settings": {
+            "logo": "shopify://shop_images/e4e83ef93a53c4de2225d0879eef5d6e.jpg",
             "logo_max_width": 220,
             "title": "Hello",
             "title_size": 76,
@@ -37,11 +38,11 @@
             "button_color": "#000000",
             "button_hover_color": "#333333",
             "button_text_color": "#ffffff",
-            "background_color": "#0a0a0a",
+            "background_color": "#25A1F4",
             "text_color": "#ffffff",
-            "logo_animation_duration": 1,
-            "fade_duration": 1,
-            "show_once": true
+            "logo_animation_duration": 2,
+            "fade_duration": 2,
+            "show_once": false
           },
           "blocks": {}
         }
