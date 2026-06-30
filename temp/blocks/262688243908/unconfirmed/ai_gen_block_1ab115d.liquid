@@ -1,6 +1,211 @@
+{% doc %}
+  @prompt
+    separateur 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-separator-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: {{ block.settings.spacing_top }}px 0 {{ block.settings.spacing_bottom }}px;
+  }
+
+  .ai-separator-line-{{ ai_gen_id }} {
+    height: {{ block.settings.line_thickness }}px;
+    background: {{ block.settings.line_style }};
+    border: none;
+    margin: 0;
+    {% if block.settings.line_style == 'gradient' %}
+      background: linear-gradient(
+        to right,
+        transparent,
+        {{ block.settings.line_color }} 20%,
+        {{ block.settings.line_color }} 80%,
+        transparent
+      );
+    {% elsif block.settings.line_style == 'solid' %}
+      background-color: {{ block.settings.line_color }};
+    {% elsif block.settings.line_style == 'dashed' %}
+      background: repeating-linear-gradient(
+        to right,
+        {{ block.settings.line_color }} 0px,
+        {{ block.settings.line_color }} {{ block.settings.dash_length }}px,
+        transparent {{ block.settings.dash_length }}px,
+        transparent calc({{ block.settings.dash_length }}px + {{ block.settings.dash_gap }}px)
+      );
+    {% elsif block.settings.line_style == 'dotted' %}
+      background: repeating-linear-gradient(
+        to right,
+        {{ block.settings.line_color }} 0px,
+        {{ block.settings.line_color }} {{ block.settings.dot_size }}px,
+        transparent {{ block.settings.dot_size }}px,
+        transparent calc({{ block.settings.dot_size }}px + {{ block.settings.dot_gap }}px)
+      );
+    {% endif %}
+    border-radius: {{ block.settings.line_roundness }}px;
+    opacity: {{ block.settings.opacity }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-separator-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-separator-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <hr class="ai-separator-line-{{ ai_gen_id }}">
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Séparateur",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Style de ligne"
+    },
+    {
+      "type": "select",
+      "id": "line_style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solide"
+        },
+        {
+          "value": "gradient",
+          "label": "Dégradé"
+        },
+        {
+          "value": "dashed",
+          "label": "Tirets"
+        },
+        {
+          "value": "dotted",
+          "label": "Points"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "line_color",
+      "label": "Couleur",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "line_thickness",
+      "label": "Épaisseur",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "line_roundness",
+      "label": "Arrondi",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "opacity",
+      "label": "Opacité",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "dash_length",
+      "label": "Longueur des tirets",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "dash_gap",
+      "label": "Espacement des tirets",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "dot_size",
+      "label": "Taille des points",
+      "min": 2,
+      "max": 10,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "dot_gap",
+      "label": "Espacement des points",
+      "min": 2,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Dimensions"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Largeur sur ordinateur",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "spacing_top",
+      "label": "Espacement haut",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "label": "Espacement bas",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Séparateur"
+    }
+  ]
+}
 {% endschema %}
