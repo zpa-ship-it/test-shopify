@@ -12,7 +12,7 @@
     "hero": {
       "type": "ios-hero",
       "settings": {
-        "video": "shopify://files/videos/Create_a_cinematic_10_12_second_ultra_high-end_product_intro_video_for_a_premium_hygiene_brand.____T_seed3592258393.mp4",
+        "image": "shopify://shop_images/2989c2ef6e8fcbbe2c488574300ba21f.jpg",
         "eyebrow": "LUMA OS",
         "heading": "Fluid luxury, engineered for now.",
         "text": "",
@@ -37,8 +37,8 @@
     "feature": {
       "type": "liquid-feature",
       "settings": {
-        "image": "shopify://shop_images/file_000000006c7871f5aa43e32133bbd5d7.png",
-        "badge": "Liquid glass",
+        "image": "shopify://shop_images/file_00000000fd2c720c8e3e82319dab86c1.png",
+        "badge": "New!",
         "eyebrow": "System feel",
         "heading": "Soft reflections. Sharp commerce.",
         "text": "A dark, polished interface that feels closer to a product launch than a default Shopify theme."
