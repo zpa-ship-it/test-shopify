@@ -11,6 +11,62 @@
   "type": "footer",
   "name": "Footer group",
   "sections": {
+    "17828487871d7f6c56": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_7c7c6f6_D6gzHU": {
+          "type": "ai_gen_block_7c7c6f6",
+          "settings": {
+            "show_icon": true,
+            "title": "Remboursement confirmé",
+            "message": "<p>Votre remboursement a été traité avec succès. Vous recevrez les fonds dans les délais indiqués ci-dessous.</p>",
+            "show_details": true,
+            "order_label": "Numéro de commande",
+            "order_number": "#1234",
+            "amount_label": "Montant remboursé",
+            "refund_amount": "50,00 $",
+            "method_label": "Méthode de remboursement",
+            "refund_method": "Carte de crédit",
+            "time_label": "Délai de traitement",
+            "processing_time": "5 à 10 jours ouvrables",
+            "footer_text": "<p>Si vous avez des questions, n'hésitez pas à nous contacter.</p>",
+            "button_text": "",
+            "button_link": "",
+            "desktop_width_percent": 100,
+            "text_alignment": "center",
+            "padding": 40,
+            "spacing": 16,
+            "border_radius": 8,
+            "background_color": "#0C0B0B",
+            "title_color": "#FFFFFF",
+            "text_color": "#FFFFFF",
+            "icon_background_color": "#4CAF50",
+            "icon_color": "#0C0B0B",
+            "details_background_color": "#0C0B0B",
+            "details_label_color": "#FFFFFF",
+            "details_value_color": "#FFFFFF",
+            "footer_text_color": "#666666",
+            "button_background_color": "#000000",
+            "button_text_color": "#0C0B0B",
+            "button_hover_color": "#333333",
+            "title_size": 28,
+            "text_size": 16,
+            "details_text_size": 14,
+            "footer_text_size": 14,
+            "button_text_size": 16,
+            "icon_size": 60,
+            "details_padding": 20,
+            "details_border_radius": 4,
+            "button_border_radius": 4
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_7c7c6f6_D6gzHU"
+      ],
+      "settings": {}
+    },
     "1782839704ae4cf722": {
       "type": "_blocks",
       "blocks": {
@@ -72,7 +128,7 @@
             "title_color": "#ffffff",
             "subtitle_color": "#ffffff",
             "card_background_color": "#000000",
-            "card_border_color": "#0C0B0B",
+            "card_border_color": "#0c0b0b",
             "icon_background_color": "#000000",
             "icon_color": "#ffffff",
             "reason_title_color": "#000000",
@@ -302,6 +358,7 @@
     }
   },
   "order": [
+    "17828487871d7f6c56",
     "1782839704ae4cf722",
     "17828373380c4871b4",
     "featured_collection_bHgtmF",
