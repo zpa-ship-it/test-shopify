@@ -29,8 +29,8 @@
       "settings": {
         "eyebrow": "",
         "heading": "Objects with atmosphere.",
-        "collection": "",
-        "limit": 2,
+        "collection": "test-1",
+        "limit": 8,
         "link_label": "View all"
       }
     },
