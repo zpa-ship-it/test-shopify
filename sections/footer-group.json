@@ -11,6 +11,33 @@
   "type": "footer",
   "name": "Footer group",
   "sections": {
+    "1782839704ae4cf722": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_1ab115d_8TBpVa": {
+          "type": "ai_gen_block_1ab115d",
+          "settings": {
+            "line_style": "gradient",
+            "line_color": "#FFFFFF",
+            "line_thickness": 4,
+            "line_roundness": 10,
+            "opacity": 0.7,
+            "dash_length": 5,
+            "dash_gap": 50,
+            "dot_size": 10,
+            "dot_gap": 20,
+            "desktop_width_percent": 50,
+            "spacing_top": 100,
+            "spacing_bottom": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_1ab115d_8TBpVa"
+      ],
+      "settings": {}
+    },
     "17828373380c4871b4": {
       "type": "_blocks",
       "blocks": {
@@ -46,14 +73,14 @@
             "subtitle_color": "#ffffff",
             "card_background_color": "#000000",
             "card_border_color": "#ffffff",
-            "icon_background_color": "#000f9f",
+            "icon_background_color": "#000000",
             "icon_color": "#ffffff",
             "reason_title_color": "#000000",
             "reason_text_color": "#ffffff",
             "border_radius": 12,
             "card_border_radius": 8,
             "icon_size": 48,
-            "reason_title_size": 18,
+            "reason_title_size": 16,
             "reason_text_size": 14
           },
           "blocks": {}
@@ -116,15 +143,55 @@
             "subtitle_color": "#edecec",
             "card_background_color": "#0b0b0b",
             "card_border_color": "#e5e5e5",
-            "icon_background_color": "#afb4df",
+            "icon_background_color": "#000000",
             "icon_color": "#ffffff",
             "item_title_color": "#edecec",
             "item_text_color": "#666666"
           },
           "blocks": {}
         },
+        "ai_gen_block_1390fa2_FLpUzR": {
+          "type": "ai_gen_block_1390fa2",
+          "settings": {
+            "title": "Ce que nos clients disent",
+            "subtitle": "Découvrez les avis de nos clients satisfaits",
+            "title_size": 32,
+            "subtitle_size": 16,
+            "desktop_width_percent": 100,
+            "review_1_author": "Marie Dubois",
+            "review_1_rating": 5,
+            "review_1_text": "Excellent produit! La qualité est exceptionnelle et la livraison a été rapide. Je recommande vivement!",
+            "review_1_date": "15 juin 2026",
+            "review_1_verified": true,
+            "review_2_author": "Jean Tremblay",
+            "review_2_rating": 5,
+            "review_2_text": "Très satisfait de mon achat. Le service client est à l'écoute et professionnel.",
+            "review_2_date": "10 juin 2026",
+            "review_2_verified": true,
+            "review_3_author": "Sophie Leblanc",
+            "review_3_rating": 4,
+            "review_3_text": "Bon rapport qualité-prix. Je suis contente de mon achat et je reviendrai!",
+            "review_3_date": "5 juin 2026",
+            "review_3_verified": true,
+            "background_color": "#000000",
+            "title_color": "#000000",
+            "subtitle_color": "#FFFFFF",
+            "card_background": "#000000",
+            "author_color": "#000000",
+            "text_color": "#FFFFFF",
+            "date_color": "#FFFFFF",
+            "star_color": "#FFD700",
+            "star_empty_color": "#E0E0E0",
+            "avatar_background": "#000f9f",
+            "avatar_text_color": "#ffffff",
+            "verified_color": "#008060",
+            "card_border_radius": 12
+          },
+          "blocks": {}
+        },
         "ai_gen_block_c6de49f_BfjFT8": {
           "type": "ai_gen_block_c6de49f",
+          "disabled": true,
           "settings": {
             "show_header": true,
             "title": "Ce que nos clients disent",
@@ -186,6 +253,7 @@
       },
       "block_order": [
         "ai_gen_block_2828f19_fK98gn",
+        "ai_gen_block_1390fa2_FLpUzR",
         "ai_gen_block_c6de49f_BfjFT8"
       ],
       "settings": {}
@@ -234,6 +302,7 @@
     }
   },
   "order": [
+    "1782839704ae4cf722",
     "17828373380c4871b4",
     "featured_collection_bHgtmF",
     "1782836800ddf1139d",
