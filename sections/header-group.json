@@ -42,7 +42,7 @@
             "text_color": "#ffffff",
             "logo_animation_duration": 2,
             "fade_duration": 2,
-            "show_once": false
+            "show_once": true
           },
           "blocks": {}
         }
