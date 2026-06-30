@@ -27,12 +27,16 @@
     "featured": {
       "type": "featured-collection",
       "settings": {
-        "eyebrow": "The edit",
+        "eyebrow": "",
         "heading": "Objects with atmosphere.",
         "collection": "",
-        "limit": 4,
+        "limit": 2,
         "link_label": "View all"
       }
+    },
+    "17828288684713fbe8": {
+      "type": "_blocks",
+      "settings": {}
     },
     "feature": {
       "type": "liquid-feature",
@@ -48,6 +52,7 @@
   "order": [
     "hero",
     "featured",
+    "17828288684713fbe8",
     "feature"
   ]
 }
