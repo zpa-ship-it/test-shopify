@@ -13,8 +13,8 @@
       "type": "ios-hero",
       "settings": {
         "image": "shopify://shop_images/2989c2ef6e8fcbbe2c488574300ba21f.jpg",
-        "eyebrow": "LUMA OS",
-        "heading": "Fluid luxury, engineered for now.",
+        "eyebrow": "test",
+        "heading": "Innovation Starts with Clean.",
         "text": "",
         "primary_label": "Shop the drop",
         "primary_link": "shopify://collections/all",
@@ -44,8 +44,8 @@
         "image": "shopify://shop_images/file_00000000fd2c720c8e3e82319dab86c1.png",
         "badge": "New!",
         "eyebrow": "System feel",
-        "heading": "Soft reflections. Sharp commerce.",
-        "text": "A dark, polished interface that feels closer to a product launch than a default Shopify theme."
+        "heading": "Less Noise. More Confidence.Premium hygiene designed for the moments that matter.",
+        "text": "A dark, polished interface where every detail feels like a product launch."
       }
     }
   },

@@ -27,10 +27,10 @@
       "type": "featured-collection",
       "name": "Featured collection",
       "settings": {
-        "eyebrow": "The edit",
-        "heading": "Objects with atmosphere.",
+        "eyebrow": "test",
+        "heading": "Clean Has Evolved",
         "collection": "",
-        "limit": 4,
+        "limit": 8,
         "link_label": "View all"
       }
     },
