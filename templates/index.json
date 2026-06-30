@@ -29,7 +29,7 @@
       "settings": {
         "eyebrow": "",
         "heading": "Objects with atmosphere.",
-        "collection": "",
+        "collection": "test-1",
         "limit": 2,
         "link_label": "View all"
       }
