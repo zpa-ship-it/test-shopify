@@ -1,6 +1,530 @@
+{% doc %}
+  @prompt
+    confirmation de remboursement 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-refund-confirmation-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    text-align: {{ block.settings.text_alignment }};
+  }
+
+  .ai-refund-confirmation__icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin: 0 auto {{ block.settings.spacing }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ block.settings.icon_background_color }};
+    border-radius: 50%;
+  }
+
+  .ai-refund-confirmation__icon-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.icon_size }}px * 0.5);
+    height: calc({{ block.settings.icon_size }}px * 0.5);
+    stroke: {{ block.settings.icon_color }};
+  }
+
+  .ai-refund-confirmation__title-{{ ai_gen_id }} {
+    margin: 0 0 {{ block.settings.spacing }}px;
+    color: {{ block.settings.title_color }};
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 600;
+  }
+
+  .ai-refund-confirmation__message-{{ ai_gen_id }} {
+    margin: 0 0 {{ block.settings.spacing }}px;
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.5;
+  }
+
+  .ai-refund-confirmation__details-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: {{ block.settings.details_background_color }};
+    padding: {{ block.settings.details_padding }}px;
+    border-radius: {{ block.settings.details_border_radius }}px;
+    margin-bottom: {{ block.settings.spacing }}px;
+    text-align: left;
+  }
+
+  .ai-refund-confirmation__detail-row-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 8px;
+    font-size: {{ block.settings.details_text_size }}px;
+  }
+
+  .ai-refund-confirmation__detail-row-{{ ai_gen_id }}:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-refund-confirmation__detail-label-{{ ai_gen_id }} {
+    color: {{ block.settings.details_label_color }};
+    font-weight: 500;
+  }
+
+  .ai-refund-confirmation__detail-value-{{ ai_gen_id }} {
+    color: {{ block.settings.details_value_color }};
+    font-weight: 600;
+  }
+
+  .ai-refund-confirmation__footer-{{ ai_gen_id }} {
+    margin-top: {{ block.settings.spacing }}px;
+    color: {{ block.settings.footer_text_color }};
+    font-size: {{ block.settings.footer_text_size }}px;
+  }
+
+  .ai-refund-confirmation__button-{{ ai_gen_id }} {
+    display: inline-block;
+    margin-top: {{ block.settings.spacing }}px;
+    padding: 12px 24px;
+    background-color: {{ block.settings.button_background_color }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_text_size }}px;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-refund-confirmation__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-refund-confirmation__detail-row-{{ ai_gen_id }} {
+      gap: 20px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-refund-confirmation-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.show_icon %}
+    <div class="ai-refund-confirmation__icon-{{ ai_gen_id }}">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+  {% endif %}
+
+  {% if block.settings.title != blank %}
+    <h2 class="ai-refund-confirmation__title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+  {% endif %}
+
+  {% if block.settings.message != blank %}
+    <div class="ai-refund-confirmation__message-{{ ai_gen_id }}">
+      {{ block.settings.message }}
+    </div>
+  {% endif %}
+
+  {% if block.settings.show_details %}
+    <div class="ai-refund-confirmation__details-{{ ai_gen_id }}">
+      {% if block.settings.order_number != blank %}
+        <div class="ai-refund-confirmation__detail-row-{{ ai_gen_id }}">
+          <span class="ai-refund-confirmation__detail-label-{{ ai_gen_id }}">{{ block.settings.order_label }}</span>
+          <span class="ai-refund-confirmation__detail-value-{{ ai_gen_id }}">{{ block.settings.order_number }}</span>
+        </div>
+      {% endif %}
+
+      {% if block.settings.refund_amount != blank %}
+        <div class="ai-refund-confirmation__detail-row-{{ ai_gen_id }}">
+          <span class="ai-refund-confirmation__detail-label-{{ ai_gen_id }}">{{ block.settings.amount_label }}</span>
+          <span class="ai-refund-confirmation__detail-value-{{ ai_gen_id }}">{{ block.settings.refund_amount }}</span>
+        </div>
+      {% endif %}
+
+      {% if block.settings.refund_method != blank %}
+        <div class="ai-refund-confirmation__detail-row-{{ ai_gen_id }}">
+          <span class="ai-refund-confirmation__detail-label-{{ ai_gen_id }}">{{ block.settings.method_label }}</span>
+          <span class="ai-refund-confirmation__detail-value-{{ ai_gen_id }}">{{ block.settings.refund_method }}</span>
+        </div>
+      {% endif %}
+
+      {% if block.settings.processing_time != blank %}
+        <div class="ai-refund-confirmation__detail-row-{{ ai_gen_id }}">
+          <span class="ai-refund-confirmation__detail-label-{{ ai_gen_id }}">{{ block.settings.time_label }}</span>
+          <span class="ai-refund-confirmation__detail-value-{{ ai_gen_id }}">{{ block.settings.processing_time }}</span>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if block.settings.footer_text != blank %}
+    <div class="ai-refund-confirmation__footer-{{ ai_gen_id }}">
+      {{ block.settings.footer_text }}
+    </div>
+  {% endif %}
+
+  {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+    <a href="{{ block.settings.button_link }}" class="ai-refund-confirmation__button-{{ ai_gen_id }}">
+      {{ block.settings.button_text }}
+    </a>
+  {% endif %}
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Remboursement confirmé",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contenu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Afficher l'icône",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Titre",
+      "default": "Remboursement confirmé"
+    },
+    {
+      "type": "richtext",
+      "id": "message",
+      "label": "Message",
+      "default": "<p>Votre remboursement a été traité avec succès. Vous recevrez les fonds dans les délais indiqués ci-dessous.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Détails du remboursement"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_details",
+      "label": "Afficher les détails",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "order_label",
+      "label": "Étiquette de commande",
+      "default": "Numéro de commande"
+    },
+    {
+      "type": "text",
+      "id": "order_number",
+      "label": "Numéro de commande",
+      "default": "#1234"
+    },
+    {
+      "type": "text",
+      "id": "amount_label",
+      "label": "Étiquette du montant",
+      "default": "Montant remboursé"
+    },
+    {
+      "type": "text",
+      "id": "refund_amount",
+      "label": "Montant du remboursement",
+      "default": "50,00 $"
+    },
+    {
+      "type": "text",
+      "id": "method_label",
+      "label": "Étiquette de méthode",
+      "default": "Méthode de remboursement"
+    },
+    {
+      "type": "text",
+      "id": "refund_method",
+      "label": "Méthode de remboursement",
+      "default": "Carte de crédit"
+    },
+    {
+      "type": "text",
+      "id": "time_label",
+      "label": "Étiquette de délai",
+      "default": "Délai de traitement"
+    },
+    {
+      "type": "text",
+      "id": "processing_time",
+      "label": "Délai de traitement",
+      "default": "5 à 10 jours ouvrables"
+    },
+    {
+      "type": "header",
+      "content": "Pied de page"
+    },
+    {
+      "type": "richtext",
+      "id": "footer_text",
+      "label": "Texte du pied de page",
+      "default": "<p>Si vous avez des questions, n'hésitez pas à nous contacter.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texte du bouton"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Lien du bouton"
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Largeur sur ordinateur",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alignement du texte",
+      "options": [
+        {
+          "value": "left",
+          "label": "Gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "right",
+          "label": "Droite"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Espacement interne",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Espacement entre éléments",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Arrondi des coins",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Arrière-plan",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Titre",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Texte",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "icon_background_color",
+      "label": "Arrière-plan de l'icône",
+      "default": "#4CAF50"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icône",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "details_background_color",
+      "label": "Arrière-plan des détails",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "details_label_color",
+      "label": "Étiquettes des détails",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "details_value_color",
+      "label": "Valeurs des détails",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "footer_text_color",
+      "label": "Texte du pied de page",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Arrière-plan du bouton",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Texte du bouton",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Survol du bouton",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Typographie"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Taille du titre",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Taille du texte",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "details_text_size",
+      "label": "Taille du texte des détails",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "footer_text_size",
+      "label": "Taille du pied de page",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Taille du bouton",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Style de l'icône"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Taille de l'icône",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Style des détails"
+    },
+    {
+      "type": "range",
+      "id": "details_padding",
+      "label": "Espacement interne",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "details_border_radius",
+      "label": "Arrondi des coins",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Style du bouton"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Arrondi des coins",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Remboursement confirmé"
+    }
+  ]
+}
 {% endschema %}
