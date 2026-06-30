@@ -13,9 +13,10 @@
       "type": "ios-hero",
       "settings": {
         "video": "shopify://files/videos/Create_a_cinematic_10_12_second_ultra_high-end_product_intro_video_for_a_premium_hygiene_brand.____T_seed3592258393.mp4",
+        "image": "shopify://shop_images/logo-melon-deau-sans-couleur.png",
         "eyebrow": "LUMA OS",
         "heading": "Fluid luxury, engineered for now.",
-        "text": "A cinematic Shopify storefront with liquid glass, slow motion depth, and a premium mobile-first shopping flow.",
+        "text": "",
         "primary_label": "Shop the drop",
         "primary_link": "shopify://collections/all",
         "secondary_label": "Explore",
