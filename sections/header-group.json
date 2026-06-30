@@ -18,6 +18,18 @@
         "menu": "main-menu"
       }
     },
+    "featured_collection_86YB7G": {
+      "type": "featured-collection",
+      "disabled": true,
+      "name": "Featured collection",
+      "settings": {
+        "eyebrow": "The edit",
+        "heading": "Objects with atmosphere.",
+        "collection": "",
+        "limit": 4,
+        "link_label": "View all"
+      }
+    },
     "17827565725ac65f09": {
       "type": "_blocks",
       "blocks": {
@@ -54,6 +66,7 @@
   },
   "order": [
     "header",
+    "featured_collection_86YB7G",
     "17827565725ac65f09"
   ]
 }
